@@ -33,17 +33,17 @@
             
             for(let i=0;i<ps.length;i++){
                 const a=ps[i].querySelector("a");
-                const tag=a.innerHTML.substring("./".length);
-                
+                const tag=a.innerHTML;
+
+                // We add a "latest" label and move to the top if it is the latest version
                 if(tag===latestVersion){
                     cnt.removeChild(ps[i]);
                     cnt.prepend(ps[i]);
-                    ps[i].classList.add("latest");
-                    
-                    createLabel(ps[i],"Latest release",["latest"]);                    
-
+                    ps[i].classList.add("latest");                    
+                    createLabel(ps[i],"Latest release",["latest"]);                   
                 }
-                
+
+                // We add labels based on the -suffix
                 if(tag.indexOf("-alpha")!=-1){
                     createLabel(ps[i],"Alpha",["alpha"]);                    
                 }else if(tag.indexOf("-stable")!=-1){
@@ -51,8 +51,9 @@
                 }
             }
         }
-        
-       window.onload=function(){       
+
+        // Get the last release and load the labels
+        window.onload=function(){       
             const latestReleaseUrl="https://api.github.com/repos/jMonkeyEngine/jmonkeyengine/releases/latest";
             const req = new XMLHttpRequest();
             req.onreadystatechange = function() {
@@ -72,7 +73,7 @@
         <h1>jMonkeyEngine</h1><h2>javadoc</h2>
     </header>
     <section>
- <p><a href='./testNewBuild16-alpha'>testNewBuild16-alpha</a></p> <p><a href='./testNewBuild15-stable'>testNewBuild15-stable</a></p> <p><a href='./v3.0'>v3.0</a></p>
+ <p><a href='./testNewBuild16-alpha/index.html'>testNewBuild16-alpha</a></p> <p><a href='./testNewBuild15-stable/index.html'>testNewBuild15-stable</a></p> <p><a href='./v3.0/index.html'>v3.0</a></p>
     </section>
     <footer>
         <hr />

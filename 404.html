@@ -4,21 +4,32 @@
         <meta charset="utf-8">
         <title>jMonkeyEngine Javadoc - 404</title>
         <link rel="stylesheet" href="/style.css">
+
+        <!-- Polyfills, since this page must work also for ancient browsers -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.13/es5-shim.min.js" integrity="sha256-ZRWwGWedbHHvnM8DDaoLhDR5Zfjd+/1TCnC9mwh9lEg=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.5/es6-shim.min.js" integrity="sha256-v4QwgOaE1ZEBhPc7nMtFztuz+yWcxwiYM0OwG0Wtj3Q=" crossorigin="anonymous"></script>
         <script>
             window.onload=function(){
-                var pathname = window.location.pathname.substring(1);
+                var pathname = window.location.pathname;
              
-                if(!pathname.startsWith("v3.0")){ // prevent redirect loop.
+                // If the missing page is not inside /v3.0 (the old javadoc) then we setup a redirect
+                if(!pathname.startsWith("/v3.0")){ 
                     document.getElementById("spinner").style.display="block";
-                    var redir="/v3.0/"+pathname;
+
+                    var redir="/v3.0"+pathname;
                     console.log("Redirect to",redir);
-                    
-                    var redirel= document.getElementById("redir");
-                    redirel.style.display="block";
-                    redirel.querySelector("a").href=redir;
+
+                    // Redirect in 5 seconds
                     setTimeout(function(){
                         document.location.href = redir;
                     },5000);
+                    
+                    // Setup a clickable link, in case the automatic redirect fails for some reason
+                    var redirel= document.getElementById("redir");
+                    redirel.style.display="block";
+                    redirel.querySelector("a").href=redir;
+                  
+                    // Decrease the value in #time every second (just a visual feedback for the timer)
                     setInterval(function(){
                         var timer=document.getElementById("time");
                         var time=timer.innerHTML;
