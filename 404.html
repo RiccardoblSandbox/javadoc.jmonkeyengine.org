@@ -40,6 +40,10 @@
                 var redir=null;                
                 if(!pathname.startsWith("/v3.0")){ 
                     if(pathname.startsWith("/latest")){ // redirect to latest version
+                        
+                        document.querySelector("#tx").style.display="none";
+                        document.querySelector("#txLatest").style.display="block";
+                   
                         const latestReleaseUrl="https://api.github.com/repos/jMonkeyEngine/jmonkeyengine/releases/latest";
                         const req = new XMLHttpRequest();
                         req.onreadystatechange = function() {
@@ -72,15 +76,20 @@
                 margin:0.2em;
                 padding:0;
             }
-            #tx{
+            #tx,#txLatest{
                 font-size:1.5em;
                 width:100%;
                 text-align:center;
             }
-            #tx h1{
+            #tx h1,#txLatest h1{
                 font-size:2em;
 
             }
+            
+            #txLatest {
+                display:none;    
+            }
+            
             .lds-dual-ring {
                 display:inline-block;
                 width: 8em;
@@ -124,7 +133,7 @@
         <div id="txLatest">
             <h1>You are being redirected to the latest javadoc.</h1>
             <p>You can select a different version from <a href="/">here</a>.</p>
-            <p id="redir">You will be automatically redirected to the <a href="">latest javadoc</a> in <span id="time">1</span> seconds.
+            <p id="redir">You will be automatically redirected to the <a href="/">latest javadoc</a> in <span id="time">1</span> seconds.
         </div>
     </body>
 </html>
