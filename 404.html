@@ -23,10 +23,12 @@
                     },5000);
                     
                     // Setup a clickable link, in case the automatic redirect fails for some reason
-                    var redirel= document.getElementById("redir");
-                    redirel.style.display="block";
-                    redirel.querySelector("a").href=redir;
-                  
+                    var redirel= document.querySelectorAll("#redir");
+                    redirel.forEach(function(el){
+                        el.style.display="block";
+                        el.querySelector("a").href=redir;
+                    });
+                    
                     // Decrease the value in #time every second (just a visual feedback for the timer)
                     setInterval(function(){
                         var timer=document.getElementById("time");
