@@ -39,7 +39,7 @@
                 
                 var redir=null;                
                 if(!pathname.startsWith("/v3.0")){ 
-                    if(pathname.startsWith("/latest"){ // redirect to latest version
+                    if(pathname.startsWith("/latest")){ // redirect to latest version
                         window.onload=function(){       
                             const latestReleaseUrl="https://api.github.com/repos/jMonkeyEngine/jmonkeyengine/releases/latest";
                             const req = new XMLHttpRequest();
