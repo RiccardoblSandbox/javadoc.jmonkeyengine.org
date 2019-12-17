@@ -40,20 +40,19 @@
                 var redir=null;                
                 if(!pathname.startsWith("/v3.0")){ 
                     if(pathname.startsWith("/latest")){ // redirect to latest version
-                        window.onload=function(){       
-                            const latestReleaseUrl="https://api.github.com/repos/jMonkeyEngine/jmonkeyengine/releases/latest";
-                            const req = new XMLHttpRequest();
-                            req.onreadystatechange = function() {
-                                if (this.readyState == 4 && this.status == 200) {
-                                    const json=JSON.parse(this.responseText);
-                                    console.log("Detect latest version",json["tag_name"]);
-                                    redir="/"+json["tag_name"]+pathname;
-                                    redirect(redir);
-                                }
-                            };
-                            req.open("GET", latestReleaseUrl, true);
-                            req.send();                      
+                        const latestReleaseUrl="https://api.github.com/repos/jMonkeyEngine/jmonkeyengine/releases/latest";
+                        const req = new XMLHttpRequest();
+                        req.onreadystatechange = function() {
+                            if (this.readyState == 4 && this.status == 200) {
+                                const json=JSON.parse(this.responseText);
+                                console.log("Detect latest version",json["tag_name"]);
+                                redir="/"+json["tag_name"]+pathname;
+                                redirect(redir);
+                            }
                         };
+                        req.open("GET", latestReleaseUrl, true);
+                        req.send();                      
+                        
                     }else{  // If the missing page is not inside /v3.0 (the old javadoc) then we setup a redirect
                         redir="/v3.0"+pathname;
                         redirect(redit);
